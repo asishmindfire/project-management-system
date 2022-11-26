@@ -1,19 +1,28 @@
-import ProjectList from "./components/ProjectList";
+import Project from "./components/Project";
 import TicketList from "./components/TicketList";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import Landing from "./components/Landing";
+import Navbar from "./components/Navbar";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+import Ticket from "./components/Ticket";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<ProjectList />} />
-        <Route path="/project" element={<TicketList />} />
-        {/* <Route path="/greeting/:type" render={(props) => <TicketList text="Hello, " {...props} />} /> */}
-      </Routes>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Landing />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/project" element={<Project />} />
+          <Route path="/ticketlist" element={<TicketList />} />
+          <Route path="/ticket" element={<Ticket />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

@@ -3,15 +3,7 @@ const router = express.Router();
 const Project = require("../models/projectSchema");
 
 router.get("/fetchallprojects", (req, res) => {
-  console.log("Hello World", req.body.projectId);
-
-  //   Project
-  //     .collection("projects")
-  //     .find({})
-  //     .toArray((err, result) => {
-  //       if (err) throw err;
-  //       console.log(result);
-  //     });
+  // console.log("Hello World", req.body.projectId);
 
   Project.find({})
     .then((projectExist) => {

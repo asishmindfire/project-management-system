@@ -9,8 +9,10 @@ dotenv.config({ path: "./config.env" });
 // I have converted the @ to %40 in the below connection url because the mongodb doesn't understand some special character.
 require('./db/conn');
 app.use(express.json());
-app.use('/v1', require('./router/project'));
-app.use('/v1', require('./router/fetchAllProject'));
+app.use('/', require('./router/project'));
+app.use('/', require('./router/fetchAllProject'));
+app.use('/', require('./router/registration'));
+app.use('/', require('./router/login'));
 
 
 const server = app.listen(8080, () => {

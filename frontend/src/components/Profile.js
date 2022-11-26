@@ -1,42 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ProjectService from "../services/ProjectService";
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
-// import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-// import TicketList from '../components/TicketList';
+import axios from "axios";
 
-export default function ProjectList() {
-  const [projects, setProjects] = useState([]);
+export default function Profile() {
+  const [project, setProjeject] = useState([]);
   const [projectdetails, setProjectdetails] = useState({
     projectdescription: "",
     projectname: "",
     projectId: "",
   });
+  //   const [projectdata, setProjectdata] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    ProjectService.getAllProjects()
-      .then((response) => {
-        setProjects(response.data.data);
-        console.log(`data coming ->`, response.data.data);
+    axios
+      .get("http://localhost:8080/fetchallprojects")
+      .then((res) => {
+        setProjeject(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(`=======>`, err);
+        console.log(err);
       });
   }, []);
-  //   The above [] is use to define dependence of useEffect
 
   const projectdetailsOnChange = (e) => {
     console.log(e.target.name, e.target.value);
     setProjectdetails({ ...projectdetails, [e.target.name]: e.target.value });
   };
 
-  // const HandleOnClick = () => {
-  // console.log("handleOnClick clicked", projects);
-  // useNavigate(`/project`);
-  // projects.map((el) => console.log(`-=-=->`, el));
-  // history.pushState(``);
-  // console.log(`-=-=->`, projects[0].projectname);
-  // };
+  const onddlChange = (e) => {
+    // setProjectdata(e.target.value);
+    console.log("hulkj", e.target.value);
+    // navigate(`/project`, { state: { name: JSON.stringify(e.target.value) }});
+    navigate(`/project`, { state: { name: e.target.value } });
+    // alert(e.target.value);
+  };
 
   const InsertProject = () => {
     console.log(`===>`, projectdetails);
@@ -53,8 +53,26 @@ export default function ProjectList() {
   };
 
   return (
-    <div className="container my-5">
-      <h1 className="text-center">List of Projects</h1>
+    <div className="container">
+      {/* <div> */}
+      <select
+        className="form-control col-md-1"
+        //   value={projectdata}
+        onChange={onddlChange}
+      >
+        <option value="0"> --Select Project-- </option>
+        {project.map((el) => {
+          return (
+            <option
+              key={el.projectId}
+              value={JSON.stringify(el)}
+              // onClick={updateStateVal}
+            >
+              {el.projectname}
+            </option>
+          );
+        })}
+      </select>
 
       <button
         type="button"
@@ -152,48 +170,32 @@ export default function ProjectList() {
         </div>
       </div>
 
-      {/* This is project tabel */}
-      <table className="table table-bordered table-striped">
-        <thead>
-          <td>Id</td>
-          <td>Projects</td>
-          <td>Description</td>
-          <td>Tickets</td>
-        </thead>
-        <tbody>
-          {projects.map((el) => {
-            return (
-              <tr key={el.projectId}>
-                <td> {el.projectId} </td>
-                <td> {el.projectname} </td>
-                <td> {el.projectdescription} </td>
-                {/* <button
-                  className="btn btn-primary my-2 mx-3"
-                  onClick={HandleOnClick}
-                >
-                  Tickets
-                </button> */}
-                <Link
-                  className="btn btn-primary my-2 mx-3"
-                  role="button"
-                  to="/project"
-                  state={{ data: el.tickets, projectId: el.projectId }}
-                  // to={"/project/:76"}
-                  // project_details={el}
-                  // onClick={HandleOnClick}
-                >
-                  Button1
-                </Link>
-                {/* <td> {projects.acceptance} </td> */}
-                {/* <td> {projects.tags} </td> */}
-                {/* <td> {projects.employee} </td> */}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {/* </div> */}
+      <div className="jumbotron mt-5">
+        <div className="col-sm-8 mx-auto">
+          <h1 className="text-center">PROFILE</h1>
+        </div>
+        <table className="table col-md-6 mx-auto">
+          <tbody>
+            <tr>
+              <td>Fist Name</td>
+              {/* <td>{this.state.first_name}</td> */}
+            </tr>
+            <tr>
+              <td>Last Name</td>
+              {/* <td>{this.state.last_name}</td> */}
+            </tr>
+            <tr>
+              <td>Email</td>
+              {/* <td>{this.state.email}</td> */}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
+
+  //   }
 }
 
-// export default withRouter(ProjectList);
+// export default Profile
