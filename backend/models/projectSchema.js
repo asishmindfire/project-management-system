@@ -17,10 +17,22 @@ const projectSchema = new Schema({
     type: String,
     required: true,
   },
-  tickets: {
-    type: Array,
+  // tickets: {
+  //   type: Array,
+  //   // required: true,
+  // },
+  created_by: {
+    type: Number,
     // required: true,
   },
+  created_date: {
+    type: Date,
+    // default: Date.now
+  },
+  updated_date: {
+    type: Date,
+    required: true
+  }
 });
 
 
@@ -30,6 +42,10 @@ const ticketSchema = new Schema({
     required: true,
   },
   projectId: {
+    type: Number,
+    required: true,
+  },
+  category_id: {
     type: Number,
     required: true,
   },
@@ -101,16 +117,19 @@ const UserSchema = new Schema({
 
 
 const CategorySchema = new Schema({
-  projectId: {
-    type: Number,
-    required: true
-  },
-  category: {
-    type: String
-  },
-  ticketId: {
+  // projectId: {
+  //   type: Number,
+  //   required: true
+  // },
+  category_id: {
     type: Number
   },
+  category_name: {
+    type: String
+  },
+  // ticketId: {
+  //   type: Number
+  // },
   created_date: {
     type: Date,
     // default: Date.now
@@ -126,8 +145,8 @@ const TagSchema = new Schema({
       type: Number,
       required: true
     },
-    tag: {
-      type: String
+    tags: {
+      type: Array
     },
     ticketId: {
       type: Number
