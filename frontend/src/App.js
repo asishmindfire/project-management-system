@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Ticket from "./components/Ticket";
+import UserAssignedTickets from "./components/UserAssignedTickets";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/project" element={<Project />} />
           <Route path="/ticketlist" element={<TicketList />} />
           <Route path="/ticket" element={<Ticket />} />
+          <Route path="/userticket" element={<UserAssignedTickets />} />
         </Routes>
       </div>
     </Router>

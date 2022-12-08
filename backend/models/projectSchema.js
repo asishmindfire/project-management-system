@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
-// here we created Schema object 
+// here we created Schema object
 const Schema = mongoose.Schema;
 
 // Creating a inatance of mongoose that is projectSchema
 const projectSchema = new Schema({
   projectId: {
-    type: String,
+    type: Number,
     required: true,
   },
   projectname: {
@@ -31,10 +31,9 @@ const projectSchema = new Schema({
   },
   updated_date: {
     type: Date,
-    required: true
-  }
+    required: true,
+  },
 });
-
 
 const ticketSchema = new Schema({
   ticketId: {
@@ -79,31 +78,30 @@ const ticketSchema = new Schema({
   },
   updated_date: {
     type: Date,
-    required: true
-  }
+    required: true,
+  },
 });
-
 
 const UserSchema = new Schema({
   user_id: {
     type: Number,
-    required: true
+    required: true,
   },
   user_name: {
     type: String,
-    required: true
+    required: true,
   },
   user_role: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   created_date: {
     type: Date,
@@ -111,10 +109,9 @@ const UserSchema = new Schema({
   },
   updated_date: {
     type: Date,
-    required: true
-  }
+    required: true,
+  },
 });
-
 
 const CategorySchema = new Schema({
   // projectId: {
@@ -122,10 +119,10 @@ const CategorySchema = new Schema({
   //   required: true
   // },
   category_id: {
-    type: Number
+    type: Number,
   },
   category_name: {
-    type: String
+    type: String,
   },
   // ticketId: {
   //   type: Number
@@ -136,37 +133,35 @@ const CategorySchema = new Schema({
   },
   updated_date: {
     type: Date,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const TagSchema = new Schema({
-    projectId: {
-      type: Number,
-      required: true
-    },
-    tags: {
-      type: Array
-    },
-    ticketId: {
-      type: Number
-    },
-    created_date: {
-      type: Date,
-      // default: Date.now
-    },
-    updated_date: {
-      type: Date,
-      required: true
-    }
+  projectId: {
+    type: Number,
+    required: true,
+  },
+  tags: {
+    type: Array,
+  },
+  ticketId: {
+    type: Number,
+  },
+  created_date: {
+    type: Date,
+    // default: Date.now
+  },
+  updated_date: {
+    type: Date,
+    required: true,
+  },
 });
 
-const User = mongoose.model('users', UserSchema);
-const Project = mongoose.model('Projects', projectSchema);
-const Ticket = mongoose.model('tickets', ticketSchema);
-const Category = mongoose.model('categories', CategorySchema);
-const Tag = mongoose.model('tags', TagSchema);
+const User = mongoose.model("users", UserSchema);
+const Project = mongoose.model("Projects", projectSchema);
+const Ticket = mongoose.model("tickets", ticketSchema);
+const Category = mongoose.model("categories", CategorySchema);
+const Tag = mongoose.model("tags", TagSchema);
 
-
-
-module.exports = {Project, User, Ticket, Category, Tag};
+module.exports = { Project, User, Ticket, Category, Tag };

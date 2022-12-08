@@ -2,6 +2,79 @@ const express = require("express");
 const router = express.Router();
 const { Ticket, Category, Tag } = require("../models/projectSchema");
 
+
+// /**
+//  * @swagger
+//  *  components:
+//  *    schemas:
+//  *      ticketReq:
+//  *        type: object
+//  *        properties:
+//  *          user_id:
+//  *            type: integer
+//  *          category_id:
+//  *            type: integer
+//  */
+
+// /**
+//  * @swagger
+//  *  components:
+//  *    schemas:
+//  *      ticketRes:
+//  *        type: object
+//  *        properties:
+//  *          status:
+//  *            type: integer
+//  *          message:
+//  *            type: string
+//  *          data:
+//  *            type: array
+//  *            items:
+//  *              type: object
+//  *              properties:
+//  *               ticketId:
+//  *                  type: integer
+//  *               projectId:
+//  *                  type: integer
+//  *               ticketname:
+//  *                  type: string
+//  *               ticketdescription:
+//  *                  type: string
+//  *               created_by:
+//  *                  type: integer
+//  *               assign_to:
+//  *                  type: integer
+//  *               acceptance_criteria:
+//  *                  type: string
+//  *               status:
+//  *                  type: string
+//  *               category_name:
+//  *                  type: string
+//  */
+
+// /**
+//  * @swagger
+//  * /tickets-by-categoryandtags:
+//  *  post:
+//  *    summary: This api is used to insert new project in mongodb
+//  *    description: This api is used to insert new project in mongodb
+//  *    requestBody:
+//  *        required: true
+//  *        content:
+//  *          application/json:
+//  *            schema:
+//  *              $ref: '#components/schemas/ticketReq'
+//  *    responses:
+//  *      200:
+//  *        description: insert project api
+//  *        content:
+//  *          application/json:
+//  *            schema:
+//  *              items:
+//  *                $ref: '#components/schemas/ticketRes'
+//  */
+
+
 router.post("/tickets-by-categoryandtags", (req, res) => {
   // console.log("Hello World", req.body.projectId);
 

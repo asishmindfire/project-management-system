@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import ProjectService from "../services/ProjectService";
 import axios from "axios";
 
@@ -10,15 +10,38 @@ export default function Profile() {
     projectname: "",
     projectId: "",
   });
-  //   const [projectdata, setProjectdata] = useState();
+  const [userData, setuserData] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/fetchallprojects")
-      .then((res) => {
-        setProjeject(res.data.data);
-        // console.log(res.data.data);
+      .get("http://localhost:8080/profile", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: localStorage.getItem("usertoken"),
+        },
+      })
+      .then((user_data) => {
+        console.log(`user data ->`, user_data.data);
+
+        if (user_data.data.status === 1) {
+          // setuserData({ ...user_data.data.data, ...userData  });
+          setuserData(user_data.data.data);
+
+          // console.log(`===========->`, userData);
+          axios
+            .get("http://localhost:8080/fetchallprojects")
+            .then((res) => {
+              setProjeject(res.data.data);
+              // console.log(res.data.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          alert(user_data.data.message);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -80,7 +103,7 @@ export default function Profile() {
         data-bs-toggle="modal"
         data-bs-target="#projectModal"
       >
-        +Add Project
+        Add Project
       </button>
 
       {/* Add Project Modal */}
@@ -106,21 +129,6 @@ export default function Profile() {
             </div>
             <div className="modal-body">
               <form>
-                <div className="mb-3">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Project Id:
-                  </label>
-                  <input
-                    type="text"
-                    name="projectId"
-                    className="form-control"
-                    id="recipient-id"
-                    placeholder="Enter your first name"
-                    // value={projectdetails.project_id ? projectdetails.project_id : projectdetails}
-                    value={projectdetails.projectId}
-                    onChange={projectdetailsOnChange}
-                  />
-                </div>
                 <div className="mb-3">
                   <label htmlFor="recipient-name" className="col-form-label">
                     Project Name:
@@ -170,6 +178,15 @@ export default function Profile() {
         </div>
       </div>
 
+      <Link
+        className="btn btn-secondary my-2"
+        role="button"
+        to="/userticket"
+        state={{ data: userData.user_id }}
+      >
+        All Tickets
+      </Link>
+
       {/* </div> */}
       <div className="jumbotron mt-5">
         <div className="col-sm-8 mx-auto">
@@ -178,16 +195,16 @@ export default function Profile() {
         <table className="table col-md-6 mx-auto">
           <tbody>
             <tr>
-              <td>Fist Name</td>
-              {/* <td>{this.state.first_name}</td> */}
+              <td>Username</td>
+              <td>{userData.user_name}</td>
             </tr>
             <tr>
-              <td>Last Name</td>
-              {/* <td>{this.state.last_name}</td> */}
+              <td>User Role</td>
+              <td>{userData.user_role}</td>
             </tr>
             <tr>
               <td>Email</td>
-              {/* <td>{this.state.email}</td> */}
+              <td>{userData.email}</td>
             </tr>
           </tbody>
         </table>

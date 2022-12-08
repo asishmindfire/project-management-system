@@ -5,6 +5,7 @@ const moment = require("moment-timezone");
 const bcrypt = require("bcrypt");
 
 router.post("/register", (req, res) => {
+  console.log(`Request body for registration ->`, req.body);
   var digits = "123456789";
   let id = "";
   for (let i = 0; i < 6; i++) {
@@ -12,7 +13,7 @@ router.post("/register", (req, res) => {
   }
 
   const userData = {
-    user_id: id,
+    user_id: parseInt(id),
     user_name: req.body.user_name,
     email: req.body.email,
     password: req.body.password,
@@ -30,17 +31,27 @@ router.post("/register", (req, res) => {
           userData.password = hash;
           User.create(userData)
             .then((user) => {
+              console.log({ status: 1, message: user.email + " registered!" });
               res.json({ status: 1, message: user.email + " registered!" });
             })
             .catch((err) => {
+              console.log(`Error in create function ->`, {
+                status: 0,
+                message: err.message,
+              });
               res.json({ status: 0, message: err.message });
             });
         });
       } else {
+        console.log({ status: 0, message: "User already exists" });
         res.json({ status: 0, message: "User already exists" });
       }
     })
     .catch((err) => {
+      console.log(`Error in findOne function ->`, {
+        status: 0,
+        message: err.message,
+      });
       res.json({ status: 0, message: err.message });
     });
 });

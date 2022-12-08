@@ -2,6 +2,53 @@ const express = require("express");
 const router = express.Router();
 const { Project } = require("../models/projectSchema");
 
+
+
+// /**
+//  * @swagger
+//  *  components:
+//  *    schemas:
+//  *      CategoryRes:
+//  *        type: object
+//  *        properties:
+//  *          status:
+//  *            type: integer
+//  *          message:
+//  *            type: string
+//  *          data:
+//  *            type: array
+//  *            items:
+//  *              type: object
+//  *              properties:
+//  *               _id:
+//  *                  type: string
+//  *               projectId:
+//  *                  type: integer
+//  *               projectname:
+//  *                  type: string
+//  *               projectdescription:
+//  *                  type: string
+//  */
+
+// /**
+//  * @swagger
+//  * /fetchallprojects:
+//  *  get:
+//  *    summary: This api is used to insert new project in mongodb
+//  *    description: This api is used to insert new project in mongodb
+//  *    responses:
+//  *      200:
+//  *        description: insert project api
+//  *        content:
+//  *          application/json:
+//  *            type: object
+//  *            schema:
+//  *              items:
+//  *                $ref: '#components/schemas/CategoryRes'
+//  */
+
+
+
 router.get("/fetchallprojects", (req, res) => {
   // console.log("Hello World", req.body.projectId);
 
