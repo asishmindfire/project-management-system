@@ -15,9 +15,10 @@ export default function Login() {
     service
       .userLogin(logindata)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data.status === 1) {
-          localStorage.setItem('usertoken', res.data.data)
+          localStorage.setItem("usertoken", res.data.data);
+          localStorage.setItem("userrole", res.data.role);
           navigate(`/profile`);
         } else {
           console.log(res.data);

@@ -31,6 +31,7 @@ export default function Register() {
           navigate(`/login`);
         } else {
           console.log(res.data);
+          alert(res.data.message);
         }
       })
       .catch((err) => {

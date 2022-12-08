@@ -17,7 +17,7 @@ export default function TicketList(props) {
       })
       .then((res) => {
         setTickets(res.data.data);
-        console.log(res.data);
+        console.log(`All tickets under a project ->`, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -42,7 +42,7 @@ export default function TicketList(props) {
           </tr>
         </thead>
         <tbody>
-          {tickets.map((el) => {
+          {tickets && tickets.map((el) => {
             return (
               <tr>
                 <td> {el.ticketname} </td>

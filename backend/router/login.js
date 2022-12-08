@@ -38,7 +38,7 @@ router.post("/login", (req, res) => {
     });
 
     console.log({ status: 1, message: "Login Success.", data: token });
-    res.json({ status: 1, message: "Login Success.", data: token });
+    res.json({ status: 1, message: "Login Success.", data: token, role:user.user_role });
   });
 });
 

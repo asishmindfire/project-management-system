@@ -21,7 +21,7 @@ export default function UserAssignedTickets() {
         if (res.data.data.length === 0) {
         } else {
           setTickets(res.data.data);
-          console.log(`The request data for list of tickets ->`, data);
+          console.log(`list of tickets ->`, tickets);
           service
             .getAllCategories()
             .then((resp) => {

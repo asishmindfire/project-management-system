@@ -208,7 +208,7 @@ export default function AddTicketModal(props) {
                 onChange={onUserSelection}
               >
                 <option value="0"> --Assign To-- </option>
-                {users.map((el) => {
+                {users && users.map((el) => {
                   return (
                     <option key={el.user_id} value={el.user_id}>
                       {el.user_name}
