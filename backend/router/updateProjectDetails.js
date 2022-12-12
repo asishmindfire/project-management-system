@@ -9,10 +9,17 @@ router.post("/update-project", (req, res) => {
   //  for(let [key, value] of Object.entries(req.body.update_data)) {
   //   console.log(key, value);
   //  }
+  if (!Object.keys(req.body.update_data).length > 0) {
+    return res.json({
+      status: 0,
+      message: "Please provide valid input to update.",
+    });
+  }
+  
   req.body.update_data.updated_date = moment().tz("Asia/Kolkata").format();
 
   Project.updateOne(
-    { ticketId: req.body.projectId },
+    { projectId: req.body.projectId },
     {
       $set: req.body.update_data,
     },

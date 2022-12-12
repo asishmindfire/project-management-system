@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import AddTicketModal from "./AddTicketModal";
+import UpdateProjectModal from "./UpdateProjectModal";
 
 export default function Project() {
   const location = useLocation();
-  console.log({location});
+  // console.log({ location });
   const incomingData = JSON.parse(location.state?.name);
 
-  console.log(`incomingDataincomingData => `, incomingData);
+  const [projectDetail, setprojectDetail] = useState(incomingData);
+
+  const handleOnChange = (value) => {
+    console.log(`projects data from child component ->`, value);
+    setprojectDetail(value);
+  };
+
+  console.log(`incomingDataincomingData => `, projectDetail);
 
   return (
     <div className="container">
@@ -16,11 +24,11 @@ export default function Project() {
           className="btn btn-secondary my-2"
           role="button"
           to="/ticketlist"
-          state={{ data: incomingData.projectId }}
+          state={{ data: projectDetail.projectId }}
         >
-          All Tickets
+          Tickets
         </Link>
-        <AddTicketModal data={incomingData.projectId} />
+        <AddTicketModal data={projectDetail.projectId} />
         {/* <Link
           className="btn btn-secondary my-2 mx-3"
           role="button"
@@ -36,21 +44,25 @@ export default function Project() {
           <tbody>
             <tr>
               <td>Id</td>
-              <td>{incomingData.projectId}</td>
+              <td>{projectDetail.projectId}</td>
             </tr>
             <tr>
               <td>Project</td>
-              <td>{incomingData.projectname}</td>
+              <td>{projectDetail.projectname}</td>
             </tr>
             <tr>
               <td>Description</td>
-              <td>{incomingData.projectdescription}</td>
+              <td>{projectDetail.projectdescription}</td>
             </tr>
           </tbody>
         </table>
-        <button className="btn btn-primary" type="submit">
-          Update
-        </button>
+        <UpdateProjectModal
+          onChange={(value) => {
+            console.log({ value });
+            handleOnChange(value);
+          }}
+          projectDetails={projectDetail}
+        />
       </div>
     </div>
   );

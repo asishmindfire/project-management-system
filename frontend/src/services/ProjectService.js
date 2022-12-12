@@ -94,6 +94,18 @@ class ProjectService {
     });
   }
 
+  updateProjectDeatils(request_data) {
+    console.log(`=========>>>`, request_data);
+    return axios.post(baseUrl + "/update-project", request_data, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: localStorage.getItem("usertoken"),
+      },
+    });
+  }
+
+
   getAllUsers() {
     return axios.get(baseUrl + "/fetch-all-user");
   }

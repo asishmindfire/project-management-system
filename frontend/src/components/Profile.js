@@ -12,8 +12,15 @@ export default function Profile() {
   });
   const [userData, setuserData] = useState({});
   const navigate = useNavigate();
+  const [buttonOnOff, setButtonOnOff] = useState(true);
 
   useEffect(() => {
+    if (localStorage.getItem("userrole") === "Developer_Role") {
+      //   alert("you");
+      console.log("ROLE");
+      setButtonOnOff(false);
+    }
+
     axios
       .get("http://localhost:8080/profile", {
         headers: {
@@ -97,14 +104,16 @@ export default function Profile() {
         })}
       </select>
 
-      <button
-        type="button"
-        className="btn btn-outline-primary my-3 mx-3"
-        data-bs-toggle="modal"
-        data-bs-target="#projectModal"
-      >
-        Add Project
-      </button>
+      {buttonOnOff && (
+        <button
+          type="button"
+          className="btn btn-outline-primary my-3 mx-3"
+          data-bs-toggle="modal"
+          data-bs-target="#projectModal"
+        >
+          Add Project
+        </button>
+      )}
 
       {/* Add Project Modal */}
       <div
@@ -184,7 +193,7 @@ export default function Profile() {
         to="/userticket"
         state={{ data: userData.user_id }}
       >
-        All Tickets
+        Tickets
       </Link>
 
       {/* </div> */}

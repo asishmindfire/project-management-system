@@ -21,8 +21,15 @@ export default function AddTicketModal(props) {
   const [users, setUsers] = useState([]);
   //   const [tags, setTags] = useState([]);
   //   const [showModal, setShowModal] = useState(false);
+  const [buttonOnOff, setButtonOnOff] = useState(true);
 
   useEffect(() => {
+    if (localStorage.getItem("userrole") === "Developer_Role") {
+      //   alert("you");
+      console.log("ROLE");
+      setButtonOnOff(false);
+    }
+
     axios
       .get("http://localhost:8080/profile", {
         headers: {
@@ -117,16 +124,16 @@ export default function AddTicketModal(props) {
     // <div>
     <div>
       {/* <!-- Button trigger modal --> */}
-      <button
-        type="button"
-        // onClick={() => setShowModal(true)}
-        className="btn btn-secondary"
-        data-bs-toggle="modal"
-        data-bs-target="#addTicketModal"
-        // data-backdrop="false"
-      >
-        Add Ticket
-      </button>
+      {buttonOnOff && (
+        <button
+          type="button"
+          className="btn btn-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#addTicketModal"
+        >
+          Add Ticket
+        </button>
+      )}
 
       {/* <!-- Modal --> */}
       {/* {(showModal) && ( */}
@@ -208,13 +215,14 @@ export default function AddTicketModal(props) {
                 onChange={onUserSelection}
               >
                 <option value="0"> --Assign To-- </option>
-                {users && users.map((el) => {
-                  return (
-                    <option key={el.user_id} value={el.user_id}>
-                      {el.user_name}
-                    </option>
-                  );
-                })}
+                {users &&
+                  users.map((el) => {
+                    return (
+                      <option key={el.user_id} value={el.user_id}>
+                        {el.user_name}
+                      </option>
+                    );
+                  })}
               </select>
               <TagsInput
                 onChange={(value) => {
