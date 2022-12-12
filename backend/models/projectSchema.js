@@ -48,6 +48,10 @@ const ticketSchema = new Schema({
     type: Number,
     required: true,
   },
+  tag_id: {
+    type: Number,
+    required: true,
+  },
   ticketname: {
     type: String,
     required: true,
@@ -138,16 +142,20 @@ const CategorySchema = new Schema({
 });
 
 const TagSchema = new Schema({
-  projectId: {
+  // projectId: {
+  //   type: Number,
+  //   required: true,
+  // },
+  tagsList_id: {
     type: Number,
-    required: true,
+    require: true
   },
   tags: {
     type: Array,
   },
-  ticketId: {
-    type: Number,
-  },
+  // ticketId: {
+  //   type: Number,
+  // },
   created_date: {
     type: Date,
     // default: Date.now

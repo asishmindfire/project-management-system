@@ -100,7 +100,7 @@ router.post("/tickets-by-userid", (req, res) => {
                 ticket["category_name"] = category_name;
 
                 Tag.find({
-                  ticketId: ticket.ticketId,
+                  tagsList_id: ticket.tag_id,
                 })
                   .lean()
                   .then((tagsExist) => {

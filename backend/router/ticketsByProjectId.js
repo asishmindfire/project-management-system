@@ -32,7 +32,7 @@ router.post("/tickets-by-projectid", (req, res) => {
               ticket["category_name"] = category_name;
 
               Tag.find({
-                ticketId: ticket.ticketId,
+                tagsList_id: ticket.tag_id,
               })
                 .lean()
                 .then((tagsExist) => {
@@ -99,7 +99,7 @@ router.post("/tickets-by-projectid", (req, res) => {
       // });
     })
     .catch((err) => {
-      console.log(`Error in findOne ->`, err);
+      console.log(`Error in findOne ticket ->`, err);
       return res.json({
         status: 0,
         message: err.message,

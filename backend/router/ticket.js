@@ -9,6 +9,7 @@ router.post("/insert-ticket", (req, res) => {
   var minm = 100000;
   var maxm = 999999;
   var id = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
+  var tag_id = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
 
   Category.find({})
     .then((allCategories) => {
@@ -38,6 +39,7 @@ router.post("/insert-ticket", (req, res) => {
           req.body.created_date = moment().tz("Asia/Kolkata").format();
           req.body.updated_date = moment().tz("Asia/Kolkata").format();
           req.body.category_id = category_id;
+          req.body.tag_id = tag_id;
 
           const ticket = new Ticket(req.body);
 
@@ -47,9 +49,10 @@ router.post("/insert-ticket", (req, res) => {
               console.log(`ticket created successfully.`, ticketSave);
 
               const tags = new Tag({
-                projectId: req.body.projectId,
+                // projectId: req.body.projectId,
+                tagsList_id: tag_id,
                 tags: req.body.tags,
-                ticketId: id,
+                // ticketId: id,
                 created_date: moment().tz("Asia/Kolkata").format(),
                 updated_date: moment().tz("Asia/Kolkata").format(),
               });
