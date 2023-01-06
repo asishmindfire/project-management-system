@@ -1,0 +1,50 @@
+swagger: "2.0"
+info:
+  title: This is my swagger documentation for PMS.
+  description: This is my company documentation made by me.
+  version: 1.0
+  contact:
+    email: asish@gmil.com
+  # liscence:
+  #   name: Apache 2.0
+  #   url: "http://apache.org"
+  servers: 
+    -url: "http://localhost:8080"
+    description: This is my local server
+    -url: "http://mindfire.com"
+    description: This is my company server
+
+schemes: [http, https]
+
+paths:
+  /get-all-categories:
+    get:
+      summary: This is post api
+      description: Here we can post a json data
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              status: 
+                type: integer
+                example: 1
+              message:
+                type: string
+                example: Hello World
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    category_id:
+                      type: number
+                      example: 876544
+                    category_name:
+                      type: string
+                      example: "Bug"
+        400:
+          description: User Error
+        401:
+          description: Unauthorized

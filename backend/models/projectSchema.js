@@ -35,6 +35,16 @@ const projectSchema = new Schema({
   },
 });
 
+const commentSchema = new Schema({
+  ticketId: {
+    type: Number,
+    required: true,
+  },
+  comments: {
+    type: Array,
+  },
+});
+
 const ticketSchema = new Schema({
   ticketId: {
     type: Number,
@@ -46,7 +56,7 @@ const ticketSchema = new Schema({
   },
   category_id: {
     type: Number,
-    required: true,
+    // required: true,
   },
   tag_id: {
     type: Number,
@@ -58,7 +68,7 @@ const ticketSchema = new Schema({
   },
   ticketdescription: {
     type: String,
-    required: true,
+    // required: true,
   },
   created_by: {
     type: Number,
@@ -142,20 +152,13 @@ const CategorySchema = new Schema({
 });
 
 const TagSchema = new Schema({
-  // projectId: {
-  //   type: Number,
-  //   required: true,
-  // },
   tagsList_id: {
     type: Number,
-    require: true
+    require: true,
   },
   tags: {
     type: Array,
   },
-  // ticketId: {
-  //   type: Number,
-  // },
   created_date: {
     type: Date,
     // default: Date.now
@@ -166,10 +169,23 @@ const TagSchema = new Schema({
   },
 });
 
+const BoardSchema = new Schema({
+  projectId: {
+    type: Number,
+    require: true,
+  },
+  boards: {
+    type: Array,
+    require: true,
+  },
+});
+
 const User = mongoose.model("users", UserSchema);
 const Project = mongoose.model("Projects", projectSchema);
 const Ticket = mongoose.model("tickets", ticketSchema);
 const Category = mongoose.model("categories", CategorySchema);
 const Tag = mongoose.model("tags", TagSchema);
+const Board = mongoose.model("boards", BoardSchema);
+const Comment = mongoose.model("comments", commentSchema);
 
-module.exports = { Project, User, Ticket, Category, Tag };
+module.exports = { Project, User, Ticket, Category, Tag, Board, Comment };

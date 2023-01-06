@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { Project } = require("../models/projectSchema");
 
-
-
 // /**
 //  * @swagger
 //  *  components:
@@ -47,28 +45,47 @@ const { Project } = require("../models/projectSchema");
 //  *                $ref: '#components/schemas/CategoryRes'
 //  */
 
-
-
-router.get("/fetchallprojects", (req, res) => {
+router.get("/fetchallprojects", async (req, res) => {
   // console.log("Hello World", req.body.projectId);
 
-  Project.find({})
-    .then((projectExist) => {
-      console.log(`Success findOne`, projectExist.length);
+  // Project.find({})
+  //   .then((projectExist) => {
+  //     console.log(`Success findOne`, projectExist.length);
 
-      if (projectExist.length == 0) {
-        return res.json({ status: 0, message: "No project available" });
-      }
+  //     if (projectExist.length == 0) {
+  //       return res.json({ status: 0, message: "No project available" });
+  //     }
 
-      return res.json({ status: 1, message: "Record Fetched Successfully.", data: projectExist });
-    })
-    .catch((err) => {
-      console.log(`Error in findOne ->`, err);
-      return res.json({
-        status: 0,
-        message: err.message,
-      });
+  //     return res.json({ status: 1, message: "Record Fetched Successfully.", data: projectExist });
+  //   })
+  //   .catch((err) => {
+  //     console.log(`Error in findOne ->`, err);
+  //     return res.json({
+  //       status: 0,
+  //       message: err.message,
+  //     });
+  //   });
+
+  try {
+    const projectExist = await Project.find({});
+    // console.log(`Success findOne`, projectExist.length);
+
+    if (projectExist.length == 0) {
+      return res.json({ status: 0, message: "No project available" });
+    }
+
+    return res.json({
+      status: 1,
+      message: "Record Fetched Successfully.",
+      data: projectExist,
     });
+  } catch (err) {
+    console.log(`Error in findOne ->`, err);
+    return res.json({
+      status: 0,
+      message: err.message,
+    });
+  }
 });
 
 module.exports = router;

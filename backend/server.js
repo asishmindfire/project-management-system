@@ -100,6 +100,16 @@ app.use("/", require("./router/fetchAllTicketsByUserid"));
 app.use("/", require("./router/filterTicketsByTagsAndCategory"));
 app.use("/", require("./router/fetchAllCategories"));
 app.use("/", require("./router/fetchAllUserProperties"));
+app.use("/", require("./router/insertBoard"));
+app.use("/", require("./router/getBoard"));
+app.use("/", require("./router/removeBoard"));
+app.use("/", require("./router/removeTicket"));
+app.use("/", require("./router/updateBoard"));
+app.use("/", require("./router/addComment"));
+app.use("/", require("./router/getComments"));
+app.use("/", require("./router/fetchUserByUserId"));
+app.use("/", require("./router/updateCommentByTicketId"));
+app.use("/", require("./router/deleteComment"));
 
 const server = app.listen(8080, () => {
   // var host = server.address().address;

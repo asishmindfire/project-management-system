@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = class MiddlewareServices {
   static verifyToken(req, res, next) {
-    console.log(req.headers);
+    // console.log(req.headers);
     const roles = ["Developer_Role", "Manager_Role", "Admin_Role"];
     const bearerHeader = req.headers["authorization"];
     var payload;
